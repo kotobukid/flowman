@@ -18,7 +18,13 @@ export default new Vuex.Store({
                 x: 10,
                 y: 10,
                 text: 'こんにちは'
-            }
+            },
+            {
+                id: 2,
+                x: 410,
+                y: 10,
+                text: 'こんばんは'
+            },
         ] as Node[]
     },
     getters: {
