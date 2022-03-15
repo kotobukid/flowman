@@ -6,6 +6,7 @@
         rect.event_catcher(x="-10000" y="-10000" width="22000" height="22000" v-if="resizing"
             @mousemove="mouse_move"
             @mouseup="mouse_up"
+            @mouseleave="mouse_up"
         )
 </template>
 
