@@ -1,6 +1,5 @@
 <template lang="pug">
-    .hello
-        h1 {{ msg }}
+    svg(width="1000" height="600" viewBox="0 0 1000 600")
 </template>
 
 <script lang="ts">
@@ -13,4 +12,7 @@ export default class HelloWorld extends Vue {
 </script>
 
 <style scoped lang="less">
+svg {
+    border: 1px solid grey;
+}
 </style>
