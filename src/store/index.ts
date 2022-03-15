@@ -7,7 +7,9 @@ declare type Node = {
     text: string,
     x: number,
     y: number,
-    id: number
+    id: number,
+    width: number,
+    height: number
 }
 
 export default new Vuex.Store({
@@ -17,13 +19,17 @@ export default new Vuex.Store({
                 id: 1,
                 x: 10,
                 y: 10,
-                text: 'こんにちは'
+                text: 'こんにちは',
+                width: 200,
+                height: 40
             },
             {
                 id: 2,
                 x: 410,
                 y: 10,
-                text: 'こんばんは'
+                text: 'こんばんは',
+                width: 250,
+                height: 50
             },
         ] as Node[]
     },

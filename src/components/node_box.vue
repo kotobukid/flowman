@@ -1,7 +1,7 @@
 <template lang="pug">
     g.node(:style="transform")
-        rect.frame(x="0" y="0" width="200" height="40")
-        text.text(v-text="node.text" x="100" y="28")
+        rect.frame(x="0" y="0" :width="node.width" :height="node.height")
+        text.text(v-text="node.text" :x="node.width / 2" :y="(node.height + 16) / 2")
 </template>
 
 <script lang="ts">
@@ -11,7 +11,9 @@ declare type Node = {
     id: number,
     x: number,
     y: number,
-    text: string
+    text: string,
+    width: number,
+    height: number
 }
 
 @Component
