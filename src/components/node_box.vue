@@ -2,7 +2,8 @@
     g.node(:style="transform")
         rect.frame(x="0" y="0" :width="node.width" :height="node.height")
         text.text(v-text="node.text" :x="node.width / 2" :y="(node.height + 16) / 2")
-        circle.resize_start(r="5" :cx="node.width" :cy="node.height")
+        circle.resize_start(r="5" :cx="node.width" :cy="node.height" @pointerdown="resizing = true")
+        rect.event_catcher(x="-10000" y="-10000" width="22000" height="22000" v-if="resizing")
 </template>
 
 <script lang="ts">
@@ -24,6 +25,8 @@ export default class NodeBox extends Vue {
     get transform(): string {
         return `transform: translate(${this.node.x}px, ${this.node.y}px);`;
     }
+
+    resizing: boolean = false;
 }
 
 </script>
@@ -45,5 +48,16 @@ rect.frame {
     fill: transparent;
     stroke: grey;
     stroke-width: 1px;
+
+    &:hover {
+        fill: lightblue;
+        stroke: blue;
+        cursor: nwse-resize;
+    }
+}
+
+.event_catcher {
+    fill: purple;
+    opacity: 0.3
 }
 </style>
