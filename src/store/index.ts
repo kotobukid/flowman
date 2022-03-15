@@ -3,15 +3,30 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+declare type Node = {
+    text: string,
+    x: number,
+    y: number,
+    id: number
+}
+
 export default new Vuex.Store({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
+    state: {
+        nodes: [
+            {
+                id: 1,
+                x: 10,
+                y: 10,
+                text: 'こんにちは'
+            }
+        ] as Node[]
+    },
+    getters: {
+        nodes(state) {
+            return state.nodes;
+        }
+    },
+    mutations: {},
+    actions: {},
+    modules: {}
 })

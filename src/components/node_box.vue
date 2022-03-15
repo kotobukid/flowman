@@ -1,16 +1,26 @@
 <template lang="pug">
-    g.node
+    g.node(:style="transform")
         rect.frame(x="0" y="0" width="200" height="40")
-        text.text(v-text="text" x="100" y="28")
+        text.text(v-text="node.text" x="100" y="28")
 </template>
 
 <script lang="ts">
-
 import {Component, Prop, Vue} from 'vue-property-decorator';
+
+declare type Node = {
+    id: number,
+    x: number,
+    y: number,
+    text: string
+}
 
 @Component
 export default class NodeBox extends Vue {
-    @Prop() private text!: string;
+    @Prop() private node!: Node;
+
+    get transform(): string {
+        return `transform: translate(${this.node.x}px, ${this.node.y}px);`;
+    }
 }
 
 </script>
