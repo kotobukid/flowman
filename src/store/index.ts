@@ -59,6 +59,16 @@ export default new Vuex.Store({
             }
             state.nodes = [...state.nodes];
         },
+        'node-move'(state, info: { id: number, x: number, y: number }): void {
+            for (let i = 0; i < state.nodes.length; i++) {
+                if (state.nodes[i].id === info.id) {
+                    state.nodes[i].x = info.x;
+                    state.nodes[i].y = info.y;
+                    break;
+                }
+            }
+            state.nodes = [...state.nodes];
+        },
         'move-to-top'(state, index: number): void {
             const target: Node = state.nodes.splice(index, 1)[0];
             state.nodes = [...state.nodes, target];
