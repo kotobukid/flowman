@@ -1,5 +1,5 @@
 <template lang="pug">
-    g.node(:style="transform")
+    g.node(:style="transform" @pointerenter="move_top")
         rect.frame(x="0" y="0" :width="computed_width" :height="computed_height")
         text.text(v-text="node.text" :x="computed_width / 2" :y="(computed_height + 16) / 2")
         circle.resize_start(r="5" :cx="computed_width" :cy="computed_height" @pointerdown="resizing = true")
@@ -13,18 +13,19 @@
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
 
-declare type Node = {
+declare type NodeWithIndex = {
     id: number,
     x: number,
     y: number,
     text: string,
     width: number,
-    height: number
+    height: number,
+    index: number
 }
 
 @Component
 export default class NodeBox extends Vue {
-    @Prop() private node!: Node;
+    @Prop() private node!: NodeWithIndex;
 
     get transform(): string {
         return `transform: translate(${this.node.x}px, ${this.node.y}px);`;
@@ -62,15 +63,23 @@ export default class NodeBox extends Vue {
             height: this.computed_height
         });
     }
+
+    move_top(): void {
+        this.$store.commit('move-to-top', this.node.index);
+    }
 }
 
 </script>
 
 <style lang="less" scoped>
 rect.frame {
-    fill: #ccfdf7;
+    fill: lightblue;
     stroke: black;
     stroke-width: 1px;
+
+    &:hover {
+        fill: #ccfdf7;
+    }
 }
 
 .text {

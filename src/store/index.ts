@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import _ from 'lodash';
 
 Vue.use(Vuex)
 
@@ -10,6 +11,10 @@ declare type Node = {
     id: number,
     width: number,
     height: number
+}
+
+declare type NodeWithIndex = Node & {
+    index: number
 }
 
 export default new Vuex.Store({
@@ -34,8 +39,13 @@ export default new Vuex.Store({
         ] as Node[]
     },
     getters: {
-        nodes(state) {
-            return state.nodes;
+        nodes(state): NodeWithIndex[] {
+            // @ts-ignore
+            return _.map(state.nodes, (n: Node, index: number) => {
+                // @ts-ignore
+                n.index = index;
+                return n;
+            });
         }
     },
     mutations: {
@@ -48,6 +58,10 @@ export default new Vuex.Store({
                 }
             }
             state.nodes = [...state.nodes];
+        },
+        'move-to-top'(state, index: number): void {
+            const target: Node = state.nodes.splice(index, 1)[0];
+            state.nodes = [...state.nodes, target];
         }
     },
     actions: {},
