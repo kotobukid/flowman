@@ -36,11 +36,11 @@ export default class NodeBox extends Vue {
     resize_y: number = 0;
 
     get computed_width(): number {
-        return this.node.width + this.resize_x;
+        return Math.max(200, this.node.width + this.resize_x);
     }
 
     get computed_height(): number {
-        return this.node.height + this.resize_y;
+        return Math.max(40, this.node.height + this.resize_y);
     }
 
     mouse_move(e: MouseEvent): void {
