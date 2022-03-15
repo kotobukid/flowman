@@ -38,7 +38,18 @@ export default new Vuex.Store({
             return state.nodes;
         }
     },
-    mutations: {},
+    mutations: {
+        'node-resize'(state, info: { id: number, width: number, height: number }): void {
+            for (let i = 0; i < state.nodes.length; i++) {
+                if (state.nodes[i].id === info.id) {
+                    state.nodes[i].width = info.width;
+                    state.nodes[i].height = info.height;
+                    break;
+                }
+            }
+            state.nodes = [...state.nodes];
+        }
+    },
     actions: {},
     modules: {}
 })
